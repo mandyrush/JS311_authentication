@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
-let jwtSecret = process.env.JWT_SECRET;
 
 let isAdmin = (req, res, next) => {
     if(req.isAdmin) {
@@ -29,13 +28,14 @@ let checkJWT = (req, res, next) => {
     }
 
     // Verify the token
+    let jwtSecret = process.env.JWT_SECRET;
     jwt.verify(token, jwtSecret, (error, decoded) => {
         if (error) {
             console.log("Could not verify jwt ", error);
             return res.status(401).send("Unauthorized");
         }
 
-        // the toekn is valid, store the username from the token 
+        // the token is valid, store the username from the token 
         // in the request, so that it is available to all forllowing this call
         console.log(decoded);
         req.username = decoded.username;

@@ -11,7 +11,7 @@ let getUser = (req, res) => {
 
     let id = req.params.user_id;
 
-    let sql = `SELECT * from amanda_users where id = ?`;
+    let sql = `SELECT * from users_amanda where id = ?`;
     let params = [id];
 
     db.query(sql, params, (error, rows) => {
@@ -47,7 +47,7 @@ let createUser = (req, res) => {
     let sql = 'INSERT INTO users_amanda(username, password_hash, role) values(?, ?, ?);';
     db.query(sql, [username, passwordHash, 'user'], (error, rows) => {
         // if the insert query returned an error, we log the error
-        // and returna  failed message back
+        // and return a failed message back
         if (error) {
             console.error("Failed to add user", error);
             res.status(500).send("Failed to add user");

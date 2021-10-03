@@ -54,14 +54,14 @@ let login = (req, res) => {
 
         // if the password provided is good then return a signed copy of the access token
         if (goodPassword) {
-            // the token should include things that ou are sending back to the client
+            // the token should include things that you are sending back to the client
             // which include the username and role
-            // not a good idea to send the password or the hash of hte password back
+            // not a good idea to send the password or the hash of the password back
             const unsignedToken = {
                 username: username,
                 role: role
             };
-            // sign the token useing the JWT secret
+            // sign the token using the JWT secret
             let jwtSecret = process.env.JWT_SECRET;
             const accessToken = jwt.sign(unsignedToken, jwtSecret);
 
